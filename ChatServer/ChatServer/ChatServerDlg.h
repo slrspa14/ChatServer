@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "stdAfx.h"
 
 // CChatServerDlg 대화 상자
 class CChatServerDlg : public CDialogEx
@@ -12,6 +13,9 @@ class CChatServerDlg : public CDialogEx
 public:
 	CChatServerDlg(CWnd* pParent = nullptr);	// 표준 생성자입니다.
 
+	CSocServer m_socServer;//서버용 소켓
+	//CSocCom* m_socCom;//통신용 소켓
+	CSocCom* m_socCom[MAX_CLIENT_COUNT];
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_CHATSERVER_DIALOG };
@@ -30,5 +34,13 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+	afx_msg LRESULT OnAccept(WPARAM wParam, LPARAM lParam);    // 클라이언트 접속 요청이 왔을 때 실행되는 메세지 함수
+	afx_msg LRESULT OnReceive(WPARAM wParam, LPARAM lParam);    // 클라이언트에서 오는 데이터 수신할때 실행되는 메세지 함수
 	DECLARE_MESSAGE_MAP()
+public:
+	CListBox m_List;
+	CListBox m_list2;
+	std::list<int> m_using;
+	afx_msg void OnBnClickedButtonStart();
+	CButton m_start;
 };
