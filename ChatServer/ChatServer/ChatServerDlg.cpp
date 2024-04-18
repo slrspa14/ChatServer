@@ -104,17 +104,6 @@ BOOL CChatServerDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
-	//m_socCom = NULL;
-	for (int i = 0; i < MAX_CLIENT_COUNT; i++)
-	{
-		m_socServer.m_index.push_back(i);
-	}
-	// 서버 소켓을 생성(포트번호 9195)
-	m_socServer.Create(9195);
-	// 클라이언트의 접속을 기다림
-	m_socServer.Listen();
-	// 소켓 클래스와 메인 윈도우(여기에서는 CChatServerDlg)를 연결
-	m_socServer.Init(this->m_hWnd);
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -244,23 +233,43 @@ LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 void CChatServerDlg::OnBnClickedButtonStart()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	UpdateData(TRUE);
-	char pTmp[256];
-	CString strTmp;
+	try
+	{
+		AfxMessageBox("서버 오픈");
+		//m_socCom = NULL;
+		for (int i = 0; i < MAX_CLIENT_COUNT; i++)
+		{
+			m_socServer.m_index.push_back(i);
+		}
+		// 서버 소켓을 생성(포트번호 9195)
+		m_socServer.Create(9195);
+		// 클라이언트의 접속을 기다림
+		m_socServer.Listen();
+		// 소켓 클래스와 메인 윈도우(여기에서는 CChatServerDlg)를 연결
+		m_socServer.Init(this->m_hWnd);
+		
+	}
+	catch (CException* ex)
+	{
+		ex->ReportError();
+	}
+	//UpdateData(TRUE);
+	//char pTmp[256];
+	//CString strTmp;
 
 	// pTmp에 전송할 데이터 입력
-	memset(pTmp, '\0', 256);
-	strcpy_s(pTmp, "서버 : ㅎㅇ");
+	//memset(pTmp, '\0', 256);
+	//strcpy_s(pTmp, "서버 : ㅎㅇ");
 
 	// 전송
-	for each (int i in m_using) {
-		m_socCom[i]->Send(pTmp, 256);
-	}
+	//for each (int i in m_using) {
+		//m_socCom[i]->Send(pTmp, 256);
+	//}
 	// 전송한 데이터도 리스트박스에 보여준다.
 	//strTmp.Format("%s", pTmp);
 	//int i = m_List.GetCount();
 	//m_List.InsertString(i, strTmp);
 
-	UpdateData(FALSE);
+	//UpdateData(FALSE);
 	
 }
