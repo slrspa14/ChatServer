@@ -233,6 +233,7 @@ LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 			//m_socCom[1]->Send("접속확인", 256);
 			break;
 		case 2://영상
+			CString save_path = "C:/Users/aiot/Desktop/file_test";
 			char file_buf[1024];
 			int bytesread;
 			CFile file;
@@ -244,6 +245,7 @@ LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 					file.Write(file_buf, bytesread);
 				}
 			} while (bytesread > 0);
+			file.Open(save_path, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary);//파일 만들고
 			break;
 		case 3://음성
 			
