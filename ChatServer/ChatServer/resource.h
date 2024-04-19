@@ -12,6 +12,7 @@
 #define IDC_LIST2                       1001
 #define IDC_BUTTON_START                1002
 #define IDC_BUTTON_SEND                 1002
+#define IDC_LIST3                       1003
 
 // Next default values for new objects
 // 

@@ -12,8 +12,7 @@ public:
 	CSocServer();
 	virtual ~CSocServer();
 
-    //CSocCom m_socCom;                        // 연결 요청을 한 클라이언트 서버와 실제 연결이 되는 소켓
-    CSocCom m_socCom[MAX_CLIENT_COUNT];
+    CSocCom m_socCom[MAX_CLIENT_COUNT];// 연결 요청을 한 클라이언트 서버와 실제 연결이 되는 소켓
     CSocCom* GetAcceptSocCom();                // 통신 소켓 리턴
 
     std::list<int> m_index;
