@@ -197,6 +197,7 @@ LRESULT CChatServerDlg::OnAccept(WPARAM wParam, LPARAM lParam)
 // 데이터를 받을 때는 통신 소켓 클래스에 오버라이딩한 OnReceive 메시지 함수를 사용
 LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 	// 접속된 곳에서 데이터가 도착했을 때
+	//얘는 그냥 돌악가ㅗ 있으닉깐 send만 스레드로 돌리면
 	char pTmp[1024];
 	CString strTmp;
 	memset(pTmp, '\0', 1024);
@@ -214,6 +215,8 @@ LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 	}
 	else
 	{
+		CString save_path = "C:/Users/aiot/Desktop/file_test";
+		CFile file;
 		// 리스트박스
 		CString id;
 		id.Format("%d", (int)wParam);
@@ -233,13 +236,11 @@ LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 			//m_socCom[1]->Send("접속확인", 256);
 			break;
 		case 2://영상
-			CString save_path = "C:/Users/aiot/Desktop/file_test";
 			char file_buf[1024];
 			int bytesread;
-			CFile file;
 			do
-			{
-				bytesread = m_socCom[];
+			{// 받은 데이터 버퍼에 저장하고 bytesRead만큼 데이터를 파일에 씀
+				bytesread = m_socCom[0]->Receive(file_buf, sizeof(file_buf));
 				if (bytesread > 0)
 				{
 					file.Write(file_buf, bytesread);

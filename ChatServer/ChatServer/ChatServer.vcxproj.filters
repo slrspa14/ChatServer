@@ -42,6 +42,12 @@
     <ClInclude Include="SocCom.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Send.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Accept.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChatServer.cpp">
@@ -57,6 +63,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SocCom.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Send.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Accept.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

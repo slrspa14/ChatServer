@@ -34,8 +34,8 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
-	afx_msg LRESULT OnAccept(WPARAM wParam, LPARAM lParam);    // 클라이언트 접속 요청이 왔을 때 실행되는 메세지 함수
-	afx_msg LRESULT OnReceive(WPARAM wParam, LPARAM lParam);    // 클라이언트에서 오는 데이터 수신할때 실행되는 메세지 함수
+	afx_msg LRESULT OnAccept(WPARAM wParam, LPARAM lParam);// 클라이언트 접속 요청이 왔을 때 실행되는 메세지 함수
+	afx_msg LRESULT OnReceive(WPARAM wParam, LPARAM lParam);// 클라이언트에서 오는 데이터 수신할때 실행되는 메세지 함수
 	DECLARE_MESSAGE_MAP()
 public:
 	CWinThread* m_thread;
