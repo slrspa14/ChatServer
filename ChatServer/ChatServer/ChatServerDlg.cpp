@@ -184,6 +184,7 @@ LRESULT CChatServerDlg::OnAccept(WPARAM wParam, LPARAM lParam)
 		m_socCom[tmp]->Init(this->m_hWnd);
 
 		AfxMessageBox(_T("클라이언트 접속"));
+		//thread
 	}
 	catch (CException* ex) 
 	{
@@ -197,7 +198,6 @@ LRESULT CChatServerDlg::OnAccept(WPARAM wParam, LPARAM lParam)
 // 데이터를 받을 때는 통신 소켓 클래스에 오버라이딩한 OnReceive 메시지 함수를 사용
 LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 	// 접속된 곳에서 데이터가 도착했을 때
-	//얘는 그냥 돌악가ㅗ 있으닉깐 send만 스레드로 돌리면
 	char pTmp[1024];
 	CString strTmp;
 	memset(pTmp, '\0', 1024);
@@ -215,14 +215,19 @@ LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 	}
 	else
 	{
-		CString save_path = "C:/Users/aiot/Desktop/file_test";
+		int bytesread;
+		int file_size = 0;
+		int file_num = 1;
+		CString file_save_path = "C:/Users/aiot/Desktop/file_test/receive_video" + file_num;
+		CString voice_save_path = "C:/Users/aiot/Desktop/file_test/voice/receive_video" + file_num;
 		CFile file;
 		// 리스트박스
-		CString id;
-		id.Format("%d", (int)wParam);
+		/*CString id;
+		id.Format("%d", (int)wParam);*/
 		
-		CString recv_msg = (CString)pTmp;
+		CString recv_msg = (LPSTR)pTmp;
 		CString num = "";
+		CString size = "";
 		AfxExtractSubString(num, recv_msg, 0, '/');
 		//들어옴
 		switch (_ttoi(num))
@@ -236,23 +241,42 @@ LRESULT CChatServerDlg::OnReceive(WPARAM wParam, LPARAM lParam) {
 			//m_socCom[1]->Send("접속확인", 256);
 			break;
 		case 2://영상
+			AfxExtractSubString(size, recv_msg, 1, '/');
+			int file_size = _ttoi(size);
 			char file_buf[1024];
-			int bytesread;
-			do
-			{// 받은 데이터 버퍼에 저장하고 bytesRead만큼 데이터를 파일에 씀
-				bytesread = m_socCom[0]->Receive(file_buf, sizeof(file_buf));
-				if (bytesread > 0)
+			//do
+			//{
+			//	bytesread = m_socCom[wParam]->Receive(file_buf, sizeof(file_buf));
+			//	if (bytesread > 0)
+			//	{
+			//		file.Write(file_buf, bytesread);
+			//	}
+			//} while (bytesread > 0);
+			//file.Open(save_path, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary);
+			if (file.Open(file_save_path, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary))
+			{
+				while (bytesread < file_size)
 				{
+					bytesread = m_socCom[wParam]->Receive(file_buf, sizeof(file_buf));
 					file.Write(file_buf, bytesread);
 				}
-			} while (bytesread > 0);
-			file.Open(save_path, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary);//파일 만들고
+			}
+			file_num++;
 			break;
-		case 3://음성
-			
+		case 3://음성 //3/파일 사이즈
+			if (file.Open(voice_save_path, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary))
+			{
+				while (bytesread < file_size)
+				{
+					bytesread = m_socCom[wParam]->Receive(file_buf, sizeof(file_buf));
+				}
+			}
+			file_num++;
 			break;
 		case 4://텍스트
-			
+			m_List2.AddString(recv_msg);// 4/asdfasfdw
+			//strcpy(send_text, (LPSTR)(LPCSTR)recv_msg);
+			m_socCom[1]->Send(strTmp, sizeof(strTmp));
 			break;
 		default:
 			break;

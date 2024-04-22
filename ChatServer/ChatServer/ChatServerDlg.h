@@ -1,5 +1,4 @@
-﻿
-// ChatServerDlg.h: 헤더 파일
+﻿// ChatServerDlg.h: 헤더 파일
 //
 
 #pragma once
@@ -48,5 +47,4 @@ public:
 	std::list<int> m_using;//유저리스트
 	afx_msg void OnBnClickedButtonStart();
 	CButton m_start;
-//	CButton m_btn;
 };
