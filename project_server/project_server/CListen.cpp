@@ -29,6 +29,10 @@ void CListen::OnAccept(int nErrorCode)
 
 	if (m_pWPFClient == NULL && m_pyClient == NULL)
 	{
+<<<<<<< HEAD
+=======
+		//m_pyClient = new m_pySocket;
+>>>>>>> c2fb37011da1ed07b4cd39cfe3bfd998039cc2bd
 		m_pyClient = new Topython;
 		if (!Accept(*m_pyClient))
 			AfxMessageBox(_T("ERROR : Failed can't accept new Client!"));
