@@ -37,6 +37,7 @@ protected:
 
 
 public:
+	CprojectserverDlg* dlg;
 	CListen m_ListenSocket;
 	CListBox m_list2;
 	CListBox m_list1;

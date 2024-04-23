@@ -5,6 +5,9 @@
 #include "project_server.h"
 #include "CListen.h"
 
+#include "CClientsock.h"
+#include "Topython.h"
+#include "project_serverDlg.h"
 
 
 // CListen
@@ -26,14 +29,14 @@ void CListen::OnAccept(int nErrorCode)
 
 	if (m_pWPFClient == NULL && m_pyClient == NULL)
 	{
-		m_pyClient = new m_pySocket;
+		m_pyClient = new Topython;
 		if (!Accept(*m_pyClient))
 			AfxMessageBox(_T("ERROR : Failed can't accept new Client!"));
 		m_pyClient->set_wpfsocket(m_pyClient);
 	}
 	else
 	{
-		//m_pCamClient = new CClientSocket;
+		m_pWPFClient = new CClientsock;
 		if (!Accept(*m_pWPFClient))
 			AfxMessageBox(_T("ERROR : Failed can't accept new Client!"));
 		m_pWPFClient->setlisten_sock(m_pWPFClient);

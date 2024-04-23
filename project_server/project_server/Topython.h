@@ -9,8 +9,8 @@ public:
 	virtual ~Topython();
 
 	virtual void OnReceive(int nErrorCode);
-	CAsyncSocket* m_pyClient;
-	CAsyncSocket* m_pWPFClient;
+	CAsyncSocket* m_python_Client;
+	CAsyncSocket* m_WPFClient;
 	void connect_wpf(CAsyncSocket* client);
 	void set_wpfsocket(CAsyncSocket* client);
 };

@@ -161,30 +161,17 @@ HCURSOR CprojectserverDlg::OnQueryDragIcon()
 void CprojectserverDlg::OnBnClickedButtonStart()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	try 
+	try
 	{
 		AfxMessageBox(_T("서버 오픈"), MB_OK);
-		//m_socCom = NULL;
 		wpf_socket = NULL;
 		py_sock = NULL;
 		serv_sock.Create(9195);
 		serv_sock.Listen();
-		
-		//for (int i = 0; i < 5; i++)
-		//{
-		//	m_socServer.m_index.push_back(i);
-		//}
-		//// 서버 소켓을 생성(포트번호 9195)
-		//m_socServer.Create(9195);
-		//// 클라이언트의 접속을 기다림
-		//m_socServer.Listen();
-		//// 소켓 클래스와 메인 윈도우(여기에서는 CChatServerDlg)를 연결
-		//m_socServer.Init(this->m_hWnd);
 		GetDlgItem(IDC_BUTTON_START)->ShowWindow(SW_HIDE);//버튼 숨기고
 	}
 	catch (CException* ex)
 	{
 		ex->ReportError();
 	}
-
 }
