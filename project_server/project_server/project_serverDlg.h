@@ -4,7 +4,7 @@
 
 #pragma once
 #include "CListen.h"
-
+#include "pch.h"
 
 // CprojectserverDlg 대화 상자
 class CprojectserverDlg : public CDialogEx
@@ -41,5 +41,6 @@ public:
 	CListen m_ListenSocket;
 	CListBox m_list2;
 	CListBox m_list1;
+	MYSQL* sql = new MYSQL;
 	afx_msg void OnBnClickedButtonStart();
 };

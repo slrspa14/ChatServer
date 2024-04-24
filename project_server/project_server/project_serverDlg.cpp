@@ -8,8 +8,6 @@
 #include "project_serverDlg.h"
 #include "afxdialogex.h"
 
-
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -105,7 +103,17 @@ BOOL CprojectserverDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
-
+	mysql_init(&mysql);
+	if (!mysql_real_connect(&mysql, DB_ADDRESS, DB_ID, DB_PASS, DB_NAME, 3306, NULL, 0))
+	{
+		CString s = _T("");
+		s = mysql_error(&mysql);
+		AfxMessageBox(s, MB_OK);
+	}
+	else
+	{
+		AfxMessageBox(_T("DB 연결 성공"));
+	}
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 

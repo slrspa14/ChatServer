@@ -11,3 +11,29 @@
 #include "framework.h"
 
 #endif //PCH_H
+
+#include "mysql.h"
+
+#include <WinSock2.h>
+
+#pragma comment(lib,"libmysql.lib")
+
+#pragma comment(lib,"ws2_32.lib")
+
+
+
+#define DB_ADDRESS "10.10.20.113"
+
+#define DB_ID "root"
+
+#define DB_PASS "1234"
+
+#define DB_NAME "interview"
+
+/****  mysql 변수를 추가한다.  ****/
+
+extern MYSQL_ROW row; // mysql 의 행을 맡는다.
+
+extern MYSQL_RES* m_res; // mysql의 결과를 받아온다
+
+extern MYSQL mysql; // mysql의 전체적인 연동을 담당한다.
