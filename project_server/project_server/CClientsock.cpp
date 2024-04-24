@@ -43,6 +43,8 @@ void CClientsock::OnReceive(int nErrorCode)
 	msg.Format(_T("%s"), recv_msg);
 	AfxMessageBox(msg);
 	m_pySocket->Send(recv_msg, sizeof(recv_msg));
+
+
 	//CString file_save_path, voice_save_path;
 	//file_save_path.Format(_T("C:/Users/aiot/Desktop/file_test/%d"), file_num);
 	////voice_save_path = "C:/Users/aiot/Desktop/file_test/voice/" + file_num;
