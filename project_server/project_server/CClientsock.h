@@ -13,7 +13,7 @@ public:
 	void connect_python(CAsyncSocket* client);
 	void setlisten_sock(CAsyncSocket* clinet);
 	void Create_table();
-	void insert_qry(CString name, CString occupation, CString emotion);
+	void insert_qry(CString emotion);
 };
 
 

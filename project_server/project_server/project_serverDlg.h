@@ -41,6 +41,5 @@ public:
 	CListen m_ListenSocket;
 	CListBox m_list2;
 	CListBox m_list1;
-	MYSQL* sql = new MYSQL;
 	afx_msg void OnBnClickedButtonStart();
 };

@@ -8,6 +8,11 @@
 #include "project_serverDlg.h"
 #include "afxdialogex.h"
 
+//#define DB_ADDRESS "10.10.20.113"
+//#define DB_ID "root"
+//#define DB_PW "1234"
+//#define DB_NAME "interview_result"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -103,11 +108,11 @@ BOOL CprojectserverDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
-	mysql_init(&mysql);
-	if (!mysql_real_connect(&mysql, DB_ADDRESS, DB_ID, DB_PASS, DB_NAME, 3306, NULL, 0))
+	mysql_init(&Connect);
+	if (!mysql_real_connect(&Connect, DB_ADDRESS, DB_ID, DB_PW, DB_NAME, 3306, 0, 0))
 	{
 		CString s = _T("");
-		s = mysql_error(&mysql);
+		s = mysql_error(&Connect);
 		AfxMessageBox(s, MB_OK);
 	}
 	else
@@ -169,6 +174,17 @@ HCURSOR CprojectserverDlg::OnQueryDragIcon()
 void CprojectserverDlg::OnBnClickedButtonStart()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	/*mysql_init(&Connect);
+	if (!mysql_real_connect(&Connect, DB_ADDRESS, DB_ID, DB_PW, DB_NAME, 3306, NULL, 0))
+	{
+		CString s = _T("");
+		s = mysql_error(&Connect);
+		AfxMessageBox(s, MB_OK);
+	}
+	else
+	{
+		AfxMessageBox(_T("DB 연결 성공"));
+	}*/
 	try
 	{
 		AfxMessageBox(_T("서버 오픈"), MB_OK);

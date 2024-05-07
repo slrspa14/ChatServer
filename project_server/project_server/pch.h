@@ -9,9 +9,6 @@
 
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
-
-#endif //PCH_H
-
 #include "mysql.h"
 
 #include <WinSock2.h>
@@ -22,13 +19,13 @@
 
 
 
-#define DB_ADDRESS "10.10.20.113"
+#define DB_ADDRESS "localhost"
 
 #define DB_ID "root"
 
-#define DB_PASS "1234"
+#define DB_PW "1234"
 
-#define DB_NAME "interview"
+#define DB_NAME "interview_result"
 
 /****  mysql 변수를 추가한다.  ****/
 
@@ -36,4 +33,6 @@ extern MYSQL_ROW row; // mysql 의 행을 맡는다.
 
 extern MYSQL_RES* m_res; // mysql의 결과를 받아온다
 
-extern MYSQL mysql; // mysql의 전체적인 연동을 담당한다.
+extern MYSQL Connect; // mysql의 전체적인 연동을 담당한다.
+
+#endif //PCH_H
